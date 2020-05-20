@@ -16,6 +16,11 @@ $f3->route('GET /', function() {
 
 });
 
+$f3->route('GET /survey', Function($f3) {
+
+    $view = new Template();
+    echo $view->render('views/survey.html');
+});
 
 //Run F3
 $f3->run();
