@@ -5,6 +5,7 @@ session_start();
 
 //Require the autoload file
 require_once("vendor/autoload.php");
+require_once("validate.php");
 
 //Instantiate the F3 Base class
 $f3 = Base::instance();
@@ -19,12 +20,25 @@ $f3->route('GET /', function() {
 $f3->route('GET|POST /survey', function($f3) {
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        var_dump($_POST);
+        if (!validName($_POST['name'])) {
 
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['music'] = $_POST['music'];
+            //Set an error variable in the F3 hive
+            $f3->set('errors["name"]', "Please provide a name");
+        }
+        if (!validGenre($_POST['music'])) {
 
-        $f3->reroute('result');
+            //Set an error variable in the F3 hive
+            $f3->set('errors["music"]', "Select a valid genre");
+        }
+        //Data is valid
+        if (empty($f3->get('errors'))) {
 
+            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['music'] = $_POST['music'];
+
+            $f3->reroute('result');
+        }
     }
 
     $view = new Template();

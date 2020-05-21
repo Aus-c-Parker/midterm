@@ -10,6 +10,10 @@
 
         <label for="name">Name</label>
         <input type="text" id="name" name="name">
+        <?php if (isset($errors['name'])): ?>
+                <?= ($errors['name'])."
+" ?>
+        <?php endif; ?>
 
         <p>Favorite genre of music</p>
 
@@ -27,6 +31,11 @@
 
         <input type="checkbox" id="rock" name="music[]" value="rock">
         <label for="rock">Rock</label>
+
+        <?php if (isset($errors['music'])): ?>
+                <?= ($errors['music'])."
+" ?>
+        <?php endif; ?>
 
         <input type="submit" value="submit">
 
