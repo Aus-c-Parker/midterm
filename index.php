@@ -16,10 +16,27 @@ $f3->route('GET /', function() {
 
 });
 
-$f3->route('GET /survey', Function($f3) {
+$f3->route('GET|POST /survey', function($f3) {
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        $_SESSION['name'] = $_POST['name'];
+        $_SESSION['music'] = $_POST['music'];
+
+        $f3->reroute('result');
+
+    }
 
     $view = new Template();
     echo $view->render('views/survey.html');
+});
+
+$f3->route('GET /result', function(){
+
+    $view = new Template();
+    echo $view->render('views/results.html');
+
+    session_destroy();
 });
 
 //Run F3
