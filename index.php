@@ -19,8 +19,10 @@ $f3->route('GET /', function() {
 
 $f3->route('GET|POST /survey', function($f3) {
 
+    $genre = getGenre();
+
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        var_dump($_POST);
+
         if (!validName($_POST['name'])) {
 
             //Set an error variable in the F3 hive
@@ -41,6 +43,7 @@ $f3->route('GET|POST /survey', function($f3) {
         }
     }
 
+    $f3->set('genre', $genre);
     $view = new Template();
     echo $view->render('views/survey.html');
 });

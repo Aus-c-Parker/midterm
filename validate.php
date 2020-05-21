@@ -20,3 +20,8 @@ function validGenre($genre)
         return true;
     }
 }
+
+function getGenre()
+{
+    return array('country', 'jazz', 'pop', 'rap', 'rock');
+}

@@ -9,7 +9,7 @@
 <form action="#" method="post">
 
         <label for="name">Name</label>
-        <input type="text" id="name" name="name">
+        <input type="text" id="name" name="name" value="<?= ($POST['name']) ?>">
         <?php if (isset($errors['name'])): ?>
                 <?= ($errors['name'])."
 " ?>
@@ -17,20 +17,11 @@
 
         <p>Favorite genre of music</p>
 
-        <input type="checkbox" id="country" name="music[]" value="country">
-        <label for="country">Country</label>
-
-        <input type="checkbox" id="jazz" name="music[]" value="jazz">
-        <label for="jazz">Jazz</label>
-
-        <input type="checkbox" id="pop" name="music[]" value="pop">
-        <label for="pop">Pop</label>
-
-        <input type="checkbox" id="rap" name="music[]" value="rap">
-        <label for="rap">Rap</label>
-
-        <input type="checkbox" id="rock" name="music[]" value="rock">
-        <label for="rock">Rock</label>
+        <?php foreach (($genre?:[]) as $genre): ?>
+                <label><input type="checkbox"
+                              name="music[]"
+                              value="<?= ($genre) ?>"><?= (ucfirst($genre)) ?></label><br>
+        <?php endforeach; ?>
 
         <?php if (isset($errors['music'])): ?>
                 <?= ($errors['music'])."
